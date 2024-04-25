@@ -11,23 +11,27 @@
  */
 void selection_sort(int *array, size_t size)
 {
-	size_t i, j;
-	int selected, tmp;
+	size_t i, j, sm_idx;
+	int tmp, swaped;
 
 	for (i = 0; i < size - 1; i++)
 	{
-		selected = array[i];
+		sm_idx = i;
+		swaped = 0;
 		for (j = i + 1; j < size; j++)
 		{
-			if (selected > array[j])
+			if (array[sm_idx] > array[j])
 			{
-				tmp = array[i];
-				array[i] = array[j];
-				array[j] = tmp;
-				selected = tmp;
+				sm_idx = j;
+				swaped = 1;
 			}
 		}
-		array[i] = selected;
-		print_array(array, size);
+		if (swaped)
+		{
+			tmp = array[i];
+			array[i] = array[sm_idx];
+			array[sm_idx] = tmp;
+			print_array(array, size);
+		}
 	}
 }
